@@ -4,9 +4,15 @@
 }
 @section scripts{
     <script>
-        var urlPost = '@Url.Action("Incluir", "Cliente", new { area = "" })';
+    var urlPost = '@Url.Action("Incluir", "Cliente", new { area = "" })';
+    var urlPostBeneficiario = '@Url.Action("IncluirBeneficiario", "Cliente", new { area = "" })';
+    var beneficiarios = [];
+
     </script>
     @Scripts.Render("~/bundles/clientes")
+    @Scripts.Render("~/bundles/JQueryMask")
+    @Scripts.Render("~/Scripts/Clientes/FI.Beneficiarios.js")
 }
 <h2>@Html.Raw(ViewBag.Title)</h2>
 @Html.Partial("Forms")
+@Html.Partial("Beneficiario")

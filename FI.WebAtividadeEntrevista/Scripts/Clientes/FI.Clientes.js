@@ -1,7 +1,12 @@
 ﻿
 $(document).ready(function () {
+
+    //Máscara via Jquery Mask
+    $('#CPF').mask('000.000.000-00');
+
     $('#formCadastro').submit(function (e) {
         e.preventDefault();
+
         $.ajax({
             url: urlPost,
             method: "POST",
@@ -14,24 +19,38 @@ $(document).ready(function () {
                 "Estado": $(this).find("#Estado").val(),
                 "Cidade": $(this).find("#Cidade").val(),
                 "Logradouro": $(this).find("#Logradouro").val(),
-                "Telefone": $(this).find("#Telefone").val()
+                "Telefone": $(this).find("#Telefone").val(),
+                "CPF": $(this).find("#CPF").val()
             },
             error:
-            function (r) {
-                if (r.status == 400)
-                    ModalDialog("Ocorreu um erro", r.responseJSON);
-                else if (r.status == 500)
-                    ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
-            },
+                function (r) {
+                    if (r.status == 400)
+                        ModalDialog("Ocorreu um erro", r.responseJSON);
+                    else if (r.status == 500)
+                        ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                },
             success:
-            function (r) {
-                ModalDialog("Sucesso!", r)
-                $("#formCadastro")[0].reset();
-            }
+                function (r) {
+                    $(beneficiarios).each(function (index, data) {
+                        $.ajax({
+                            url: urlPostBeneficiario,
+                            method: "POST",
+                            data:
+                            {
+                                "Id": data.Id,
+                                "CPF": data.CPF,
+                                "Nome": data.Nome,
+                                "IdCliente": JSON.parse(r).ClientId
+                            }
+                        });
+                    });
+                    console.log(JSON.parse(r));
+                    ModalDialog("Sucesso!", JSON.parse(r).message);
+                    $("#formCadastro")[0].reset();
+                }
         });
-    })
-    
-})
+    });
+});
 
 function ModalDialog(titulo, texto) {
     var random = Math.random().toString().replace('.', '');

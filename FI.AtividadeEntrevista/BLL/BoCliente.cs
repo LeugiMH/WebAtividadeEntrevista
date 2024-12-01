@@ -16,6 +16,11 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
             return cli.Incluir(cliente);
+        }        
+        public void IncluirBeneficiario(DML.Beneficiario beneficiario)
+        {
+            DAL.DaoCliente cli = new DAL.DaoCliente();
+            cli.IncluirBeneficiario(beneficiario);
         }
 
         /// <summary>
@@ -26,6 +31,11 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
             cli.Alterar(cliente);
+        }        
+        public void AlterarBeneficiario(DML.Beneficiario beneficiario)
+        {
+            DAL.DaoCliente cli = new DAL.DaoCliente();
+            cli.AlterarBeneficiario(beneficiario);
         }
 
         /// <summary>
@@ -50,6 +60,12 @@ namespace FI.AtividadeEntrevista.BLL
             cli.Excluir(id);
         }
 
+        public void ExcluirBeneficiario(long id)
+        {
+            DAL.DaoCliente cli = new DAL.DaoCliente();
+            cli.ExcluirBeneficiario(id);
+        }
+
         /// <summary>
         /// Lista os clientes
         /// </summary>
@@ -66,6 +82,15 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
             return cli.Pesquisa(iniciarEm,  quantidade, campoOrdenacao, crescente, out qtd);
+        }        
+        
+        /// <summary>
+        /// Lista os beneficiarios
+        /// </summary>
+        public List<DML.Beneficiario> PesquisaBeneficiario(int idCliente)
+        {
+            DAL.DaoCliente bene = new DAL.DaoCliente();
+            return bene.PesquisaBeneficiario(idCliente);
         }
 
         /// <summary>
@@ -77,6 +102,11 @@ namespace FI.AtividadeEntrevista.BLL
         {
             DAL.DaoCliente cli = new DAL.DaoCliente();
             return cli.VerificarExistencia(CPF);
+        }        
+        public bool VerificarBeneficiario(long Id)
+        {
+            DAL.DaoCliente cli = new DAL.DaoCliente();
+            return cli.VerificarBeneficiario(Id);
         }
     }
 }
