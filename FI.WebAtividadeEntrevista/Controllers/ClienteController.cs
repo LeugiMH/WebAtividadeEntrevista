@@ -129,7 +129,7 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                /*Talvez fosse melhor colocar toda a parte do beneficiário qeu estão nas classes de cliente um suas respectivas classes e arquivos DAL, DML, BLL e Controller*/
+                /*Talvez fosse melhor colocar toda a parte do beneficiário que está nas classes de cliente em suas respectivas classes e arquivos DAL, DML, BLL e Controller. isso pois se trata de uma nova entidade.*/
                 //Caso o beneficiário não tenha id
                 if(model.Id.ToString() == "-1" && model.CPF != "XXX.XXX.XXX-XX")
                 {
